@@ -54,4 +54,13 @@ class TaskRepository
 		$id = $this->tasks->save($editedData);
 		return $id;
 	}
+
+	/**
+	 * Untuk mendapatkan task bedasarkan id
+	 *  */
+	public function deleteTask(string $id)
+	{
+		$task = $this->tasks->find(['_id' => $id]);
+		return $task;
+	}
 }

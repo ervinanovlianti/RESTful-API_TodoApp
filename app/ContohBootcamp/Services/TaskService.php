@@ -56,4 +56,10 @@ class TaskService {
 		$id = $this->taskRepository->save( $editTask);
 		return $id;
 	}
+	public function deleteTask(string $taskId)
+	{
+		$task = $this->taskRepository->deleteTask($taskId);
+		return $task;
+	}
+
 }

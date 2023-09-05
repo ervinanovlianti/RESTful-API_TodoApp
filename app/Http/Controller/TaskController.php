@@ -71,14 +71,14 @@ class TaskController extends Controller {
 	// TODO: deleteTask()
 	public function deleteTask(Request $request)
 	{
-		$mongoTasks = new MongoModel('tasks');
+		// $mongoTasks = new MongoModel('tasks');
 		$request->validate([
 			'task_id'=>'required'
 		]);
 
 		$taskId = $request->task_id;
 
-		$existTask = $mongoTasks->find(['_id'=>$taskId]);
+		$existTask = $this->taskService->getById($taskId);
 
 		if(!$existTask)
 		{
@@ -86,8 +86,8 @@ class TaskController extends Controller {
 				"message"=> "Task ".$taskId." tidak ada"
 			], 401);
 		}
-
-		$mongoTasks->deleteQuery(['_id'=>$taskId]);
+		$this->taskService->deleteTask($existTask);
+		// $mongoTasks->deleteQuery(['_id'=>$taskId]);
 
 		return response()->json([
 			'message'=> 'Success delete task '.$taskId
