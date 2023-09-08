@@ -56,11 +56,27 @@ class TaskRepository
 	}
 
 	/**
-	 * Untuk mendapatkan task bedasarkan id
+	 * Untuk mendapatkan menghapus task berdasarkan id
 	 *  */
-	public function deleteTask(string $id)
+	public function delete(string $id)
 	{
-		$task = $this->tasks->find(['_id' => $id]);
-		return $task;
+		try {
+			$this->tasks->deleteQuery(['_id' => $id]);
+		} catch (\Exception $th) {
+			throw new \Exception("Gagal menghapus task". $th->getMessage());
+		}
+	}
+	/**
+	 * Assign Task
+	 *  */
+	public function assign($id, $assigned){
+		try {
+			$this->tasks->save(
+				['_id' => $id],
+				['$set' => ['assigned' => $assigned]]
+			);
+		} catch (\Exception $e) {
+			throw new \Exception("Gagal mengassign task dalam repository: " . $e->getMessage());
+		}
 	}
 }
