@@ -1,5 +1,6 @@
 <?php
 
+use App\ContohBootcamp\Controllers\LoginController;
 use App\Http\Controller\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('task')->group(function() {
-    Route::post('/show_tasks', [TaskController::class, 'showTasks']);
+Route::post('/register', [LoginController::class, 'register']);
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::prefix('task')->group(['middleware' => 'jwt'], function() {
+    
+    Route::post('/show_tasks', [TaskController::class, 'showTasks'])->middleware('jwt');
     Route::post('/create_task', [TaskController::class, 'createTask']);
     Route::post('/update_task', [TaskController::class, 'updateTask']);
 
