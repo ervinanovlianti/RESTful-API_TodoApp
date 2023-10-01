@@ -3,6 +3,7 @@
 namespace App\ContohBootcamp\Services;
 
 use App\ContohBootcamp\Repositories\TaskRepository;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TaskService {
 	private TaskRepository $taskRepository;
@@ -71,25 +72,6 @@ class TaskService {
 			throw new \Exception("Gagal Menghapus Task: ". $th->getMessage());
 		}
 	}
-	// public function assignTask($taskId, $assigned)
-	// {
-	// 	try {
-	// 		// Mengambil task dari repository
-	// 		$task = $this->taskRepository->getById($taskId);
-
-	// 		if (!$task) {
-	// 			throw new \Exception('Task ' . $taskId . ' tidak ditemukan');
-	// 		}
-
-	// 		// Melakukan assign task
-	// 		$task['assigned'] = $assigned;
-
-	// 		// Menyimpan perubahan ke repository
-	// 		$this->taskRepository->save($task);
-	// 	} catch (\Exception $e) {
-	// 		throw new \Exception("Gagal mengassign task: " . $e->getMessage());
-	// 	}
-	// }
 	public function assignTask($taskId, $assigned)
 	{
 		try {
@@ -177,4 +159,35 @@ class TaskService {
 			throw new \Exception("Gagal menghapus subtask: " . $e->getMessage());
 		}
 	}
+
+
+	// public function register(array $data)
+	// {
+	// 	// Validasi data register
+	// 	// ...
+
+	// 	// Buat user baru
+	// 	$user = $this->taskRepository->create([
+	// 		'name' => $data['name'],
+	// 		'email' => $data['email'],
+	// 		'password' => bcrypt($data['password']),
+	// 	]);
+
+	// 	// Generate token JWT untuk user yang baru terdaftar
+	// 	$token = JWTAuth::fromUser($user);
+
+	// 	return $token;
+	// }
+
+	// public function login(array $credentials)
+	// {
+	// 	// Validasi data login
+	// 	// ...
+
+	// 	if (!$token = JWTAuth::attempt($credentials)) {
+	// 		return false;
+	// 	}
+
+	// 	return $token;
+	// }
 }

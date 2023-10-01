@@ -187,7 +187,6 @@ class TaskController extends Controller {
 		}
 	}
 
-
 	// TODO deleteSubTask()
 	public function deleteSubtask(Request $request)
 	{
@@ -212,72 +211,23 @@ class TaskController extends Controller {
 			], 500);
 		}
 	}
-	// public function deleteSubtask(Request $request)
+
+	// public function register(Request $request)
 	// {
-	// 	$request->validate([
-	// 		'task_id' => 'required|string',
-	// 		'subtask_id' => 'required|string',
-	// 	]);
-
-	// 	$taskId = $request->input('task_id');
-	// 	$subtaskId = $request->input('subtask_id');
-
-	// 	try {
-	// 		// Memanggil metode deleteSubtask dari TaskService
-	// 		$task = $this->taskService->deleteSubtask($taskId, $subtaskId);
-
-	// 		if (!$task) {
-	// 			return response()->json([
-	// 				'message' => 'Task ' . $taskId . ' tidak ditemukan',
-	// 			], 404);
-	// 		}
-
-	// 		return response()->json($task);
-	// 	} catch (\Exception $e) {
-	// 		return response()->json([
-	// 			'message' => 'Terjadi kesalahan saat menghapus subtask: ' . $e->getMessage(),
-	// 		], 500);
-	// 	}
-	// }
-	// public function deleteSubtask(Request $request)
-	// {
-	// 	$mongoTasks = new MongoModel('tasks');
-	// 	$request->validate([
-	// 		'task_id'=>'required',
-	// 		'subtask_id'=>'required'
-	// 	]);
-
-	// 	$taskId = $request->post('task_id');
-	// 	$subtaskId = $request->post('subtask_id');
-
-	// 	$existTask = $mongoTasks->find(['_id'=>$taskId]);
-
-	// 	if(!$existTask)
-	// 	{
-	// 		return response()->json([
-	// 			"message"=> "Task ".$taskId." tidak ada"
-	// 		], 401);
-	// 	}
-
-	// 	$subtasks = isset($existTask['subtasks']) ? $existTask['subtasks'] : [];
-
-	// 	// Pencarian dan penghapusan subtask
-	// 	$subtasks = array_filter($subtasks, function($subtask) use($subtaskId) {
-	// 		if($subtask['_id'] == $subtaskId)
-	// 		{
-	// 			return false;
-	// 		} else {
-	// 			return true;
-	// 		}
-	// 	});
-	// 	$subtasks = array_values($subtasks);
-	// 	$existTask['subtasks'] = $subtasks;
-
-	// 	$mongoTasks->save($existTask);
-
-	// 	$task = $mongoTasks->find(['_id'=>$taskId]);
-
-	// 	return response()->json($task);
+	// 	$data = $request->all();
+	// 	$token = $this->taskService->register($data);
+	// 	return response()->json(['token' => $token]);
 	// }
 
+	// public function login(Request $request)
+	// {
+	// 	$credentials = $request->only('email', 'password');
+	// 	$token = $this->taskService->login($credentials);
+
+	// 	if (!$token) {
+	// 		return response()->json(['error' => 'Unauthorized'], 401);
+	// 	}
+
+	// 	return response()->json(['token' => $token]);
+	// }
 }
